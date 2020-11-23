@@ -11,7 +11,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
             Console.Write("Podaj Kwotę Brutto: ");
             kwBrutto = Double.Parse(Console.ReadLine());
             Wyplata wyplata = new Wyplata();
-            UmowaBuilder umowaBuilder = new Umowa_o_Prace();
+            UmowaBuilder umowaBuilder = new Umowa_o_Dzielo();
             wyplata.ConstructUmowa(umowaBuilder);
             umowaBuilder.Umowa.DisplayConfiguration();
 

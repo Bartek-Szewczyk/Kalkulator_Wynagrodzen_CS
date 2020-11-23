@@ -23,18 +23,17 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         public void DisplayConfiguration()
         {
             Console.WriteLine("Umowa: " + _rodzaj);
-            Console.WriteLine("Ubezpiecznie Emerytalne: " + Math.Round(UbEmerytalne,2) + " zł");
-            Console.WriteLine("Ubezpiecznie Rentowe: " + Math.Round(UbRentowe,2) + " zł");
-            Console.WriteLine("Ubezpiecznie Chorobowe: " + Math.Round(UbChorobowe,2) + " zł");
-            Console.WriteLine("Ubezpiecznie Zdrowotne: " + Math.Round(UbZdrowotne,2) + " zł");
-            Console.WriteLine("Podatek Dochodowy: " + Math.Round(PoDochodowy,2) + " zł");
-            Console.WriteLine("Wynarodznie netto: " + Math.Round(Wynagrodzenie,2) + "zł");
+            Console.WriteLine("Ubezpiecznie Emerytalne: " + Math.Round(UbEmerytalne, 2) + " zł");
+            Console.WriteLine("Ubezpiecznie Rentowe: " + Math.Round(UbRentowe, 2) + " zł");
+            Console.WriteLine("Ubezpiecznie Chorobowe: " + Math.Round(UbChorobowe, 2) + " zł");
+            Console.WriteLine("Ubezpiecznie Zdrowotne: " + Math.Round(UbZdrowotne, 2) + " zł");
+            Console.WriteLine("Podatek Dochodowy: " + Math.Round(PoDochodowy, 2) + " zł");
+            Console.WriteLine("Wynarodznie netto: " + Math.Round(Wynagrodzenie, 2) + "zł");
         }
     }
 
     public class Wyplata
     {
-
         public void ConstructUmowa(UmowaBuilder umowaBuilder)
         {
             umowaBuilder.BuildUbEmerytalne();
@@ -42,9 +41,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
             umowaBuilder.BuildUbChorobowe();
             umowaBuilder.BuildUbZdrowotne();
             umowaBuilder.BuildPoDochodowy();
-
         }
-
     }
 
     public abstract class UmowaBuilder
@@ -66,21 +63,21 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         public override void BuildUbEmerytalne()
         {
             Umowa.UbEmerytalne = Umowa.WyBrutto * 0.0976;
-           
+
             Umowa.Wynagrodzenie -= Umowa.UbEmerytalne;
         }
 
         public override void BuildUbRentowe()
         {
             Umowa.UbRentowe = Umowa.WyBrutto * 0.015;
-            
+
             Umowa.Wynagrodzenie -= Umowa.UbRentowe;
         }
 
         public override void BuildUbChorobowe()
         {
             Umowa.UbChorobowe = Umowa.WyBrutto * 0.0245;
-            
+
             Umowa.Wynagrodzenie -= Umowa.UbChorobowe;
         }
 
@@ -103,7 +100,85 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
                 Umowa.PoDochodowy *= 0.32;
             }
             Umowa.PoDochodowy -= 43.76;
-            Umowa.PoDochodowy -=(Umowa.Wynagrodzenie +Umowa.UbZdrowotne) * 0.0775;
+            Umowa.PoDochodowy -= (Umowa.Wynagrodzenie + Umowa.UbZdrowotne) * 0.0775;
+            Umowa.Wynagrodzenie -= Umowa.PoDochodowy;
+        }
+    }
+    public class Umowa_Zlecenie : UmowaBuilder
+    {
+        public Umowa_Zlecenie()
+        {
+            Umowa = new Umowa("Umowa o Pracę");
+        }
+        public override void BuildUbEmerytalne()
+        {
+            Umowa.UbEmerytalne = Umowa.WyBrutto * 0.0976;
+
+            Umowa.Wynagrodzenie -= Umowa.UbEmerytalne;
+        }
+
+        public override void BuildUbRentowe()
+        {
+            Umowa.UbRentowe = Umowa.WyBrutto * 0.015;
+
+            Umowa.Wynagrodzenie -= Umowa.UbRentowe;
+        }
+
+        public override void BuildUbChorobowe()
+        {
+            Umowa.UbChorobowe = 0;
+
+        }
+
+        public override void BuildUbZdrowotne()
+        {
+            Umowa.UbZdrowotne = Umowa.Wynagrodzenie * 0.09;
+
+            Umowa.Wynagrodzenie -= Umowa.UbZdrowotne;
+        }
+
+        public override void BuildPoDochodowy()
+        {
+            Umowa.PoDochodowy =Umowa.WyBrutto-(( (Umowa.WyBrutto - Umowa.UbEmerytalne - Umowa.UbRentowe)*0.2)+Umowa.UbRentowe+Umowa.UbEmerytalne);
+          
+            Umowa.PoDochodowy *= 0.17;
+           
+            Umowa.PoDochodowy -= (Umowa.Wynagrodzenie + Umowa.UbZdrowotne) * 0.0775;
+            Umowa.Wynagrodzenie -= Umowa.PoDochodowy;
+        }
+    }
+    public class Umowa_o_Dzielo : UmowaBuilder
+    {
+        public Umowa_o_Dzielo()
+        {
+            Umowa = new Umowa("Umowa o Pracę");
+        }
+        public override void BuildUbEmerytalne()
+        {
+            Umowa.UbEmerytalne = 0;
+        }
+
+        public override void BuildUbRentowe()
+        {
+            Umowa.UbRentowe = 0;
+        }
+
+        public override void BuildUbChorobowe()
+        {
+            Umowa.UbChorobowe = 0;
+
+        }
+
+        public override void BuildUbZdrowotne()
+        {
+            Umowa.UbZdrowotne = 0;
+        }
+
+        public override void BuildPoDochodowy()
+        {
+            Umowa.PoDochodowy = Umowa.WyBrutto -Umowa.WyBrutto * 0.2;
+
+            Umowa.PoDochodowy *= 0.17;
             Umowa.Wynagrodzenie -= Umowa.PoDochodowy;
         }
     }

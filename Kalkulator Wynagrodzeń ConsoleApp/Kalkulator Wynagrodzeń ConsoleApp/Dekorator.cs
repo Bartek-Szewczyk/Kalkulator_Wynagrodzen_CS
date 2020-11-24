@@ -6,61 +6,87 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
 {
     public interface IUmowa
     {
-        void Raport();
-       
+        string GetNazwa();
+        double GetKoszty();
+
     }
 
-    public class UmowaOPrace : IUmowa
+    public class Pracodawca : IUmowa
     {
-      
-        public void Raport()
+        public string GetNazwa()
         {
-
-            var wyplata = new Wyplata();
-            UmowaBuilder umowaBuilder = new Umowa_o_Prace();
-
-            wyplata.ConstructUmowa(umowaBuilder);
-
-            umowaBuilder.Umowa.DisplayConfiguration();
+            return " Wypłata Brutto pracownika";
         }
 
-      
+        public double GetKoszty()
+        {
+            return Program.kwBrutto;
+        }
     }
+
 
     public abstract class Decorator : IUmowa
     {
-        IUmowa _umowa;
-        
+        private IUmowa _umowa;
+        public string _name;
+        public double _kosztCalkowity;
 
         public Decorator(IUmowa umowa)
         {
             _umowa = umowa;
         }
-
-
-        public void Raport()
+        public string GetNazwa()
         {
-            throw new NotImplementedException();
+            return string.Format($"{_umowa.GetNazwa()}, {_name}");
         }
 
-       
+        public double GetKoszty()
+        {
+            return _umowa.GetKoszty() + _kosztCalkowity;
+        }
     }
 
 
-    public class Pit0 : Decorator
+    public class UEmerytalne : Decorator
     {
-        public Pit0(IUmowa umowa) : base(umowa)
+
+        public UEmerytalne(IUmowa umowa) : base(umowa)
         {
-            
-            var wyplata = new Wyplata();
-            UmowaBuilder umowaBuilder = new Umowa_o_Prace();
-            umowaBuilder.BuildUbEmerytalne();
-            umowaBuilder.BuildUbRentowe();
-            umowaBuilder.BuildUbChorobowe();
-            umowaBuilder.BuildUbZdrowotne();
-            
-            umowaBuilder.Umowa.DisplayConfiguration();
-            
+            _name = "Ubezpiecznie Emerytalne";
+            _kosztCalkowity = Program.kwBrutto * 0.0976;
+        }
+    }
+    public class URentowe : Decorator
+    {
+        public URentowe(IUmowa umowa) : base(umowa)
+        {
+            _name = "Ubezpiecznie Rentowe";
+            _kosztCalkowity = Program.kwBrutto * 0.065;
+        }
+    }
+
+    public class UWypadkowe : Decorator
+    {
+        public UWypadkowe(IUmowa umowa) : base(umowa)
+        {
+            _name = "Ubezpiecznie Wypadkowe";
+            _kosztCalkowity = Program.kwBrutto * 0.0167;
+        }
+    }
+    public class FP : Decorator
+    {
+        public FP(IUmowa umowa) : base(umowa)
+        {
+            _name = "FP";
+            _kosztCalkowity = Program.kwBrutto * 0.0245;
+        }
+    }
+    public class FGSP : Decorator
+    {
+        public FGSP(IUmowa umowa) : base(umowa)
+        {
+            _name = "FGŚP";
+            _kosztCalkowity = Program.kwBrutto * 0.001;
         }
     }
 }

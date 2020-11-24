@@ -13,6 +13,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         public override void BuildUbEmerytalne()
         {
             Umowa.UbEmerytalne = 0;
+           
         }
 
         public override void BuildUbRentowe()

@@ -23,6 +23,7 @@
             <ComboBoxItem Content="Umowa o dzieło" Name="CbUmowaoDzielo"/>
         </ComboBox>
         <CheckBox x:Name="ageCheckBox" Content="Masz ukończone 26 lat?" HorizontalAlignment="Left" Height="25" Margin="105,297,0,0" VerticalAlignment="Top" Width="218"/>
+        <CheckBox x:Name="jobCheckBox" Content="Czy to twoja jedyna praca?" HorizontalAlignment="Left" Height="25" Margin="105,341,0,0" VerticalAlignment="Top" Width="218"/>
 
     </Grid>
 </Window>

@@ -34,7 +34,7 @@ namespace Kalkulator_Wynarodzen_WPF
             PracodawcaLabel.Visibility = Visibility.Hidden;
             pracodawca.Visibility = Visibility.Hidden;
             OplatyPracodawcy.Visibility = Visibility.Hidden;
-
+            jobCheckBox.Visibility = Visibility.Hidden;
 
         }
         public static double kwBrutto { get; set; }
@@ -74,14 +74,40 @@ namespace Kalkulator_Wynarodzen_WPF
             }
             else if (CbUmowaZlecenie.IsSelected == true)
             {
-                var wyplata = new Wyplata();
-                UmowaBuilder umowaBuilder = new Umowa_Zlecenie();
-                umowaBuilder.BuildUbZdrowotne();
-                umowaBuilder.BuildPoDochodowy();
-                umowaBuilder.Umowa.DisplayConfiguration();
-                var prac = new Pracodawca();
-                pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
-                OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                if (ageCheckBox.IsChecked == true)
+                {
+                    var wyplata = new Wyplata();
+                    UmowaBuilder umowaBuilder = new Umowa_Zlecenie();
+                    umowaBuilder.Umowa.DisplayConfiguration();
+                    var prac = new Pracodawca();
+                    pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                    OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                }
+                else
+                {
+                    if (jobCheckBox.IsChecked == true)
+                    {
+                        var wyplata = new Wyplata();
+                        UmowaBuilder umowaBuilder = new Umowa_Zlecenie();
+                        wyplata.ConstructUmowa(umowaBuilder);
+                        umowaBuilder.Umowa.DisplayConfiguration();
+                        var prac = new UEmerytalne(new URentowe(new UWypadkowe(new FP(new FGSP(new Pracodawca())))));
+                        pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                        OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                    }
+                    else
+                    {
+                        var wyplata = new Wyplata();
+                        UmowaBuilder umowaBuilder = new Umowa_Zlecenie();
+                        umowaBuilder.BuildUbZdrowotne();
+                        umowaBuilder.BuildPoDochodowy();
+                        umowaBuilder.Umowa.DisplayConfiguration();
+                        var prac = new Pracodawca();
+                        pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                        OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                    }
+                }
+
             }
             else if (CbUmowaoDzielo.IsSelected == true)
             {
@@ -102,21 +128,22 @@ namespace Kalkulator_Wynarodzen_WPF
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
-            MoreInformation();
-        }
-
-        private void MoreInformation()
-        {
             if (CbUmowaoPrace.IsSelected == true)
             {
                 if (ageCheckBox != null) ageCheckBox.Visibility = Visibility.Visible;
+                if (jobCheckBox != null) jobCheckBox.Visibility = Visibility.Hidden;
+            }
+            else if (CbUmowaZlecenie.IsSelected == true)
+            {
+                ageCheckBox.Visibility = Visibility.Visible;
+                jobCheckBox.Visibility = Visibility.Visible;
             }
             else
             {
                 ageCheckBox.Visibility = Visibility.Hidden;
+                jobCheckBox.Visibility = Visibility.Hidden;
             }
+
         }
 
         private void Visibily()

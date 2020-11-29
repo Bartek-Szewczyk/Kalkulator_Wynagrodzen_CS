@@ -50,8 +50,6 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
                     Console.WriteLine($"Zawierają: {pracodawca.GetNazwa()}");
                 }
 
-
-
             }
             else if (rodzajUm == 2)
             {

@@ -1,0 +1,15 @@
+﻿<Window x:Class="Kalkulator_Wynarodzen_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kalkulator_Wynarodzen_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="brutto" HorizontalAlignment="Left" Height="38" Margin="313,89,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" TextChanged="brutto_TextChanged"/>
+        <Button x:Name="oblicz" Content="Oblicz" HorizontalAlignment="Left" Height="44" Margin="300,307,0,0" VerticalAlignment="Top" Width="157" Click="oblicz_Click"/>
+        <TextBox x:Name="netto" HorizontalAlignment="Left" Height="38" Margin="313,147,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="214" TextChanged="brutto_TextChanged"/>
+
+    </Grid>
+</Window>

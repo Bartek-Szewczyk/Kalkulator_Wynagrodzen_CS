@@ -26,20 +26,110 @@ namespace Kalkulator_Wynarodzen_WPF
         {
             InitializeComponent();
         }
-
-        private void brutto_TextChanged(object sender, TextChangedEventArgs e)
+        private void Window_Activated(object sender, EventArgs e)
         {
+            podatki.Visibility = Visibility.Hidden;
+            netto.Visibility = Visibility.Hidden;
+            NettoLabel.Visibility = Visibility.Hidden;
+            PracodawcaLabel.Visibility = Visibility.Hidden;
+            pracodawca.Visibility = Visibility.Hidden;
+            OplatyPracodawcy.Visibility = Visibility.Hidden;
+
 
         }
         public static double kwBrutto { get; set; }
+        public static string Podatki { get; set; }
+        public static string Netto { get; set; }
+
         private void oblicz_Click(object sender, RoutedEventArgs e)
         {
             kwBrutto = Double.Parse(brutto.Text);
-            var wyplata = new Wyplata();
-            UmowaBuilder umowaBuilder = new Umowa_o_Prace();
-            wyplata.ConstructUmowa(umowaBuilder);
-            netto.Text = Math.Round(umowaBuilder.Umowa.Wynagrodzenie,2).ToString();
-            umowaBuilder.Umowa.DisplayConfiguration();
+            if (CbUmowaoPrace.IsSelected == true)
+            {
+                if (ageCheckBox.IsChecked == true)
+                {
+                    var wyplata = new Wyplata();
+                    UmowaBuilder umowaBuilder = new Umowa_o_Prace();
+                    umowaBuilder.BuildUbEmerytalne();
+                    umowaBuilder.BuildUbRentowe();
+                    umowaBuilder.BuildUbChorobowe();
+                    umowaBuilder.BuildUbZdrowotne();
+                    umowaBuilder.Umowa.DisplayConfiguration();
+                    var prac = new UEmerytalne(new URentowe(new UWypadkowe(new FP(new FGSP(new Pracodawca())))));
+                    pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                    OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                }
+                else
+                {
+                    var wyplata = new Wyplata();
+                    UmowaBuilder umowaBuilder = new Umowa_o_Prace();
+                    wyplata.ConstructUmowa(umowaBuilder);
+                    umowaBuilder.Umowa.DisplayConfiguration();
+                    var prac = new UEmerytalne(new URentowe(new UWypadkowe(new FP(new FGSP(new Pracodawca())))));
+                    pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                    OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                }
+
+
+            }
+            else if (CbUmowaZlecenie.IsSelected == true)
+            {
+                var wyplata = new Wyplata();
+                UmowaBuilder umowaBuilder = new Umowa_Zlecenie();
+                umowaBuilder.BuildUbZdrowotne();
+                umowaBuilder.BuildPoDochodowy();
+                umowaBuilder.Umowa.DisplayConfiguration();
+                var prac = new Pracodawca();
+                pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+            }
+            else if (CbUmowaoDzielo.IsSelected == true)
+            {
+                var wyplata = new Wyplata();
+                UmowaBuilder umowaBuilder = new Umowa_o_Dzielo();
+                wyplata.ConstructUmowa(umowaBuilder);
+                umowaBuilder.Umowa.DisplayConfiguration();
+                var prac = new Pracodawca();
+                pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
+                OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+            }
+
+
+            Visibily();
+        }
+
+
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+
+            MoreInformation();
+        }
+
+        private void MoreInformation()
+        {
+            if (CbUmowaoPrace.IsSelected == true)
+            {
+                if (ageCheckBox != null) ageCheckBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ageCheckBox.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Visibily()
+        {
+            netto.Visibility = Visibility.Visible;
+            NettoLabel.Visibility = Visibility.Visible;
+            podatki.Visibility = Visibility.Visible;
+            netto.Text = Netto;
+            podatki.Content = Podatki;
+            PracodawcaLabel.Visibility = Visibility.Visible;
+            pracodawca.Visibility = Visibility.Visible;
+            OplatyPracodawcy.Visibility = Visibility.Visible;
+
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
     {
         public string GetNazwa()
         {
-            return " Wypłata Brutto pracownika";
+            return "Wypłata Brutto pracownika";
         }
 
         public double GetKoszty()
@@ -38,7 +38,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         }
         public string GetNazwa()
         {
-            return string.Format($"{_umowa.GetNazwa()}, {_name}");
+            return string.Format($"{_umowa.GetNazwa()}\n{_name}");
         }
 
         public double GetKoszty()

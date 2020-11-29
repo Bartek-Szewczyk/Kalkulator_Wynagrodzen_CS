@@ -24,13 +24,17 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         }
         public void DisplayConfiguration()
         {
-            Console.WriteLine("Umowa: " + _rodzaj);
-            Console.WriteLine("Ubezpiecznie Emerytalne: " + Math.Round(UbEmerytalne, 2) + " zł");
-            Console.WriteLine("Ubezpiecznie Rentowe: " + Math.Round(UbRentowe, 2) + " zł");
-            Console.WriteLine("Ubezpiecznie Chorobowe: " + Math.Round(UbChorobowe, 2) + " zł");
-            Console.WriteLine("Ubezpiecznie Zdrowotne: " + Math.Round(UbZdrowotne, 2) + " zł");
-            Console.WriteLine("Podatek Dochodowy: " + Math.Round(PoDochodowy, 2) + " zł");
-            Console.WriteLine("Wynarodznie netto: " + Math.Round(Wynagrodzenie, 2) + "zł");
+
+            MainWindow.Podatki = "Ubespiecznia/Podatki: \n" +
+                                 "\n" +
+                                 $"Ubezpiecznie Emerytalne: {Math.Round(UbEmerytalne, 2)} zł \n" +
+                                 $"Ubezpiecznie Rentowe: {Math.Round(UbRentowe, 2)} zł \n" +
+                                 $"Ubezpiecznie Chorobowe: {Math.Round(UbChorobowe, 2)} zł \n" +
+                                 $"Ubezpiecznie Zdrowotne: {Math.Round(UbZdrowotne, 2)} zł \n" +
+                                 $"Podatek Dochodowy: {Math.Round(PoDochodowy, 2)} zł";
+
+            MainWindow.Netto = $"{Math.Round(Wynagrodzenie, 2)}";
+
         }
     }
     public abstract class UmowaBuilder

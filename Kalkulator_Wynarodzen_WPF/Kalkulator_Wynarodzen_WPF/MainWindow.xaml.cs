@@ -26,8 +26,10 @@ namespace Kalkulator_Wynarodzen_WPF
         {
             InitializeComponent();
         }
-        private void Window_Activated(object sender, EventArgs e)
+       
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
             podatki.Visibility = Visibility.Hidden;
             netto.Visibility = Visibility.Hidden;
             NettoLabel.Visibility = Visibility.Hidden;
@@ -35,7 +37,6 @@ namespace Kalkulator_Wynarodzen_WPF
             pracodawca.Visibility = Visibility.Hidden;
             OplatyPracodawcy.Visibility = Visibility.Hidden;
             jobCheckBox.Visibility = Visibility.Hidden;
-
         }
         public static double kwBrutto { get; set; }
         public static string Podatki { get; set; }
@@ -158,5 +159,7 @@ namespace Kalkulator_Wynarodzen_WPF
             OplatyPracodawcy.Visibility = Visibility.Visible;
 
         }
+
+
     }
 }

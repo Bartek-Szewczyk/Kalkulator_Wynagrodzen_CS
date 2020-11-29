@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kalkulator_Wynarodzen_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1000" Activated="Window_Activated">
+        Title="MainWindow" Height="700" Width="1000" Loaded="Window_Loaded">
     <Grid Margin="0,0,0,2">
         <TextBox x:Name="brutto" HorizontalAlignment="Left" Height="28" Margin="222,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="114" FontSize="16" SelectionOpacity="0.4" />
         <Button x:Name="oblicz" Content="Oblicz" HorizontalAlignment="Left" Height="44" Margin="401,553,0,0" VerticalAlignment="Top" Width="157" Click="oblicz_Click"/>

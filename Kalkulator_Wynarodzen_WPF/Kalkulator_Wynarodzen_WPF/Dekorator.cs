@@ -38,7 +38,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         }
         public string GetNazwa()
         {
-            return string.Format($"{_umowa.GetNazwa()}\n{_name}");
+            return string.Format($"{_umowa.GetNazwa()}\n{_name}: {Math.Round(_kosztCalkowity,2)}");
         }
 
         public double GetKoszty()

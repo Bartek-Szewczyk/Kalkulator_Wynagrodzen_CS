@@ -41,7 +41,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         public override void BuildPoDochodowy()
         {
             Umowa.PoDochodowy = Umowa.WyBrutto - 250 - Umowa.UbEmerytalne - Umowa.UbChorobowe - Umowa.UbRentowe;
-            if (Umowa.WyBrutto * 12 < 85528)
+            if (Umowa.WyBrutto  < 85528)
             {
                 Umowa.PoDochodowy *= 0.17;
             }

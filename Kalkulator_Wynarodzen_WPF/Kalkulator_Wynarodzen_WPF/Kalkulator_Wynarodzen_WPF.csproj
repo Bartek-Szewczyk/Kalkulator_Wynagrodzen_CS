@@ -6,4 +6,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="calculator icon.png" />
+    <None Remove="money.png" />
+    <None Remove="tlo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="calculator icon.png" />
+    <Resource Include="money.png" />
+    <Resource Include="tlo.png" />
+  </ItemGroup>
+
 </Project>

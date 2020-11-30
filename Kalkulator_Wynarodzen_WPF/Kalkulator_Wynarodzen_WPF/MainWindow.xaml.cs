@@ -37,6 +37,7 @@ namespace Kalkulator_Wynarodzen_WPF
             pracodawca.Visibility = Visibility.Hidden;
             OplatyPracodawcy.Visibility = Visibility.Hidden;
             jobCheckBox.Visibility = Visibility.Hidden;
+            upLabel.Visibility = Visibility.Hidden;
         }
         public static double kwBrutto { get; set; }
         public static string Podatki { get; set; }
@@ -118,7 +119,7 @@ namespace Kalkulator_Wynarodzen_WPF
                 umowaBuilder.Umowa.DisplayConfiguration();
                 var prac = new Pracodawca();
                 pracodawca.Text = Math.Round(prac.GetKoszty(), 2).ToString();
-                OplatyPracodawcy.Content = "Zawierają: \n" + prac.GetNazwa();
+                OplatyPracodawcy.Content =  prac.GetNazwa();
             }
 
 
@@ -157,7 +158,7 @@ namespace Kalkulator_Wynarodzen_WPF
             PracodawcaLabel.Visibility = Visibility.Visible;
             pracodawca.Visibility = Visibility.Visible;
             OplatyPracodawcy.Visibility = Visibility.Visible;
-
+            upLabel.Visibility = Visibility.Visible;
         }
 
 

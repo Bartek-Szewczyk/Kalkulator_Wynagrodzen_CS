@@ -25,9 +25,7 @@ namespace Kalkulator_Wynagrodzeń_ConsoleApp
         public void DisplayConfiguration()
         {
 
-            MainWindow.Podatki = "Ubezpiecznia/Podatki: \n" +
-                                 "\n" +
-                                 $"Ubezpiecznie Emerytalne: {Math.Round(UbEmerytalne, 2)} zł \n" +
+            MainWindow.Podatki = $"Ubezpiecznie Emerytalne: {Math.Round(UbEmerytalne, 2)} zł \n" +
                                  $"Ubezpiecznie Rentowe: {Math.Round(UbRentowe, 2)} zł \n" +
                                  $"Ubezpiecznie Chorobowe: {Math.Round(UbChorobowe, 2)} zł \n" +
                                  $"Ubezpiecznie Zdrowotne: {Math.Round(UbZdrowotne, 2)} zł \n" +

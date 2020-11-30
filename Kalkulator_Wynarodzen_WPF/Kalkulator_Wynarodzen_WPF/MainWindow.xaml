@@ -25,7 +25,7 @@
             <ComboBoxItem Content="Umowa zlecenie" Name="CbUmowaZlecenie"/>
             <ComboBoxItem Content="Umowa o dzieło" Name="CbUmowaoDzielo"/>
         </ComboBox>
-        <CheckBox x:Name="ageCheckBox" Content="Masz ukończone 26 lat?" HorizontalAlignment="Left" Height="25" Margin="90,349,0,0" VerticalAlignment="Top" Width="218" Foreground="#FF150083" FontWeight="Bold" FontSize="14"/>
+        <CheckBox x:Name="ageCheckBox" Content="Masz mniej niż 26 lat?" HorizontalAlignment="Left" Height="25" Margin="90,349,0,0" VerticalAlignment="Top" Width="218" Foreground="#FF150083" FontWeight="Bold" FontSize="14"/>
         <CheckBox x:Name="jobCheckBox" Content="Czy to twoja jedyna praca?" HorizontalAlignment="Left" Height="25" Margin="90,393,0,0" VerticalAlignment="Top" Width="218" Foreground="#FF150083" FontWeight="Bold" FontSize="14"/>
         <Label x:Name="upLabel" Content="Ubezpiecznie/podatki:" HorizontalAlignment="Left" Height="38" Margin="653,206,0,0" VerticalAlignment="Top" Width="239" Foreground="#FF150083" FontWeight="Bold" FontSize="16"/>
 

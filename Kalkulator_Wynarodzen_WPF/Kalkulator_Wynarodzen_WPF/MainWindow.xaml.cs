@@ -46,7 +46,7 @@ namespace Kalkulator_Wynarodzen_WPF
         private void oblicz_Click(object sender, RoutedEventArgs e)
         {
             kwBrutto = Double.Parse(brutto.Text);
-            if (CbUmowaoPrace.IsSelected == true)
+            if (CbUmowaoPrace.IsSelected)
             {
                 if (ageCheckBox.IsChecked == true)
                 {
@@ -74,7 +74,7 @@ namespace Kalkulator_Wynarodzen_WPF
 
 
             }
-            else if (CbUmowaZlecenie.IsSelected == true)
+            else if (CbUmowaZlecenie.IsSelected)
             {
                 if (ageCheckBox.IsChecked == true)
                 {
@@ -111,7 +111,7 @@ namespace Kalkulator_Wynarodzen_WPF
                 }
 
             }
-            else if (CbUmowaoDzielo.IsSelected == true)
+            else if (CbUmowaoDzielo.IsSelected)
             {
                 var wyplata = new Wyplata();
                 UmowaBuilder umowaBuilder = new Umowa_o_Dzielo();
@@ -130,12 +130,12 @@ namespace Kalkulator_Wynarodzen_WPF
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CbUmowaoPrace.IsSelected == true)
+            if (CbUmowaoPrace.IsSelected)
             {
                 if (ageCheckBox != null) ageCheckBox.Visibility = Visibility.Visible;
                 if (jobCheckBox != null) jobCheckBox.Visibility = Visibility.Hidden;
             }
-            else if (CbUmowaZlecenie.IsSelected == true)
+            else if (CbUmowaZlecenie.IsSelected)
             {
                 ageCheckBox.Visibility = Visibility.Visible;
                 jobCheckBox.Visibility = Visibility.Visible;
